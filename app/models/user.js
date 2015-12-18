@@ -1,16 +1,31 @@
-var User = sequelize.define('user', {
-
-  username: {
-    type: Sequelize.STRING
-    , notEmpty: true
-    , notNull: true
-    , isLowercase: true
-  }
-  , password: { type: Sequelize.STRING }
-  , email: { type: Sequelize.STRING }
-  , firstname: { type: Sequelize.STRING }
-  , lastname: { type: Sequelize.STRING }
-
-}, { freezeTableName: true });
-
-module.exports = User;
+'use strict';
+module.exports = function(sequelize, DataTypes) {
+  var User = sequelize.define('User', {
+    username: { 
+      type: DataTypes.STRING,
+      , notEmpty: true
+      , notNull: true
+      , isLowercase: true
+    }
+    , password: {
+      type: DataTypes.STRING,
+      , notEmpty: true
+      , notNull: true
+    }
+    , email: {
+      type: DataTypes.STRING
+      , notEmpty: true
+      , notNull: true
+      , isEmail: true
+    }
+    firstname: DataTypes.STRING,
+    lastname: DataTypes.STRING
+  }, {
+    classMethods: {
+      associate: function(models) {
+        // associations can be defined here
+      }
+    }
+  });
+  return User;
+};
