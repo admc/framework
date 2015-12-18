@@ -17,8 +17,7 @@ User.profile = function(req, res) {
 };
 
 User.loginAuth = function(req, res) {
-  console.log('loginAuth');
-  res.redirect('/user/profile');
+  res.redirect('/');
 };
 
 module.exports = User;

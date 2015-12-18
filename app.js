@@ -6,42 +6,36 @@ var express = require('express')
   , bodyParser = require('body-parser')
   , passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy
-  , models  = require('../models');
+  , models  = require('./app/models')
+  , auth = require('./app/helpers/auth')
   ;
 
 //Routes
-var routes = require('./app/routes');
+var routes = require('./app/router');
 
-//auth stuff
-var findByUsername = function(username, cb) {
-  models.User.findOne({
-    where: {
-      username : username 
-    }
-  }).then(function(user) {
-    if (user) {
-      cb(null, user);
-    }
-    else {
-      cb(null, null);
-    }
-  })
-};
-
-passport.use(new Strategy(
-  function(username, password, cb) {
-    findByUsername(username, function(err, user) {
-      if (err) { return cb(err); }
-      if (!user) { return cb(null, false); }
-      if (user.password != password) { return cb(null, false); }
-      return cb(null, user);
+passport.use(new LocalStrategy(function (username, password, done) {
+    models.User.findOne({ where: {username: username} }).then(function (user) {
+      if (!user) { return done(null, false); }
+      if (!auth.compareHash(password, user.password)) {
+         return done(null, false);
+      }
+      return done(null, user);
+    }, function(err) {
+      return done(err);
     });
   }));
 
-// Initialize Passport and restore authentication state, if any, from the
-// session.
-app.use(passport.initialize());
-app.use(passport.session());
+passport.serializeUser(function(user, cb) {
+  cb(null, user.id);
+});
+
+passport.deserializeUser(function(id, cb) {
+  models.User.findById(id).then(function (user) {
+    cb(null, user);
+  }, function(err) {
+    if (err) { return cb(err); }
+  });
+});
 
 var app = express();
 
@@ -51,11 +45,17 @@ app.set('view engine', 'hbs');
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(require('morgan')('combined'));
+app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Initialize Passport and restore authentication state, if any, from the
+// session.
+app.use(passport.initialize());
+app.use(passport.session());
 
 //activate routes
 app.use('/', routes);

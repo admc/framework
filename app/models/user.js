@@ -2,13 +2,13 @@
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define('User', {
     username: { 
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
       , notEmpty: true
       , notNull: true
       , isLowercase: true
     }
     , password: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
       , notEmpty: true
       , notNull: true
     }
@@ -18,8 +18,8 @@ module.exports = function(sequelize, DataTypes) {
       , notNull: true
       , isEmail: true
     }
-    firstname: DataTypes.STRING,
-    lastname: DataTypes.STRING
+    , firstname: DataTypes.STRING
+    , lastname: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {

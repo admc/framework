@@ -1,7 +1,7 @@
-var Home = function () {};
+var Home = {};
 
-Home.prototype.index = function(req, res) {
-  res.render('home', { user: req.user });
+Home.index = function(req, res) {
+  res.render('home', { user: req.user, title: 'Sup yo' });
 };
 
-exports.Home = Home;
+module.exports = Home;
