@@ -7,9 +7,15 @@ var auth = require('connect-ensure-login').ensureLoggedIn('/user/login');
 var User = require('./controllers/user')
 var Home = require('./controllers/home')
 
-router.get('/', Home.index);
+//auth behavior
+var redirectObj = { 
+  successRedirect: '/'
+  , failureRedirect: '/user/login'
+};
+
+router.get('/', auth, Home.index);
 router.get('/user/login', User.login);
-router.post('/user/login', passport.authenticate('local', { failureRedirect: '/user/login' }), User.loginAuth);
+router.post('/user/login', passport.authenticate('local', redirectObj), User.loginAuth);
 router.get('/user/logout', User.logout);
 router.get('/user/profile', auth, User.profile);
 
