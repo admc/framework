@@ -49,7 +49,7 @@ app.use(require('morgan')('combined'));
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
-app.use(require('less-middleware')(path.join(__dirname, 'public')));
+//app.use(require('less-middleware')(path.join(__dirname, 'static')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Initialize Passport and restore authentication state, if any, from the

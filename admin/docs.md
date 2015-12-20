@@ -4,4 +4,6 @@ sequelize model:create --name User --attributes "username:string, password:strin
 
 sequelize db:migrate
 
+sudo npm install sequelize-cli -g
+
 
