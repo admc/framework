@@ -1,3 +1,7 @@
+# baked files in public
+public/css
+public/js
+
 # Logs
 logs
 *.log
