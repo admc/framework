@@ -7,7 +7,7 @@ var express = require('express')
   , passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy
   , models  = require('./app/models')
-  , auth = require('./app/helpers/auth')
+  , hash = require('./app/helpers/hash')
   ;
 
 //Routes
@@ -16,7 +16,7 @@ var routes = require('./app/router');
 passport.use(new LocalStrategy(function (username, password, done) {
     models.User.findOne({ where: {username: username} }).then(function (user) {
       if (!user) { return done(null, false); }
-      if (!auth.compareHash(password, user.password)) {
+      if (!hash.compareHash(password, user.password)) {
          return done(null, false);
       }
       return done(null, user);

@@ -1,5 +1,5 @@
 'use strict';
-var auth = require('../../app/helpers/auth');
+var hash = require('../../app/helpers/hash');
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
@@ -8,7 +8,7 @@ module.exports = {
       , firstname: 'Adam'
       , lastname: 'Admin'
       , email: 'adam@activecove.com'
-      , password: auth.generateHash('testing')
+      , password: hash.generateHash('testing')
       , createdAt: new Date()
       , updatedAt: new Date()
     }], {});
