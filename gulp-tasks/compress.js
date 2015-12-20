@@ -1,3 +1,6 @@
+// Gulp module to take everything in src/js and
+// turn it into all.min.js in public/js
+
 module.exports = function (gulp, plugins) {
   return function () {
     gulp.src('./src/js/**/*.js')

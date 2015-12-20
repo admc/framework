@@ -1,3 +1,5 @@
+// Convert all less files into css
+
 module.exports = function (gulp, plugins) {
   return function () {
     gulp.src('./src/less/**/*.less')

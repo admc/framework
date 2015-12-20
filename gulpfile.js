@@ -1,3 +1,6 @@
+// Call less and compress module (and any others defined)
+// and then watch for changes
+
 var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')();
 
