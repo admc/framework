@@ -2,8 +2,12 @@
 // and then watch for changes
 
 var gulp = require('gulp');
-var webpack = require('gulp-webpack');
+var webpack = require('webpack-stream');
 var plugins = require('gulp-load-plugins')();
+var app = require('./app');
+var models = require("./app/models");
+var debug = require('debug')('app:server');
+var http = require('http');
 
 function getTask(task) {
   return require('./gulp-tasks/' + task)(gulp, plugins);
@@ -12,13 +16,33 @@ function getTask(task) {
 gulp.task('less', getTask('less'));
 //gulp.task('compress', getTask('compress'));
 
+gulp.task('server', function() {
+  var port = process.env.PORT || '3000';
+  app.set('port', port);
+  var server = http.createServer(app);
+
+  models.sequelize.sync().then(function () {
+    server.listen(port, function() {
+      debug('Express server listening on port ' + server.address().port);
+    });
+    //server.on('error', onError);
+    server.on('listening', function() {
+      var addr = server.address();
+      var bind = typeof addr === 'string'
+        ? 'pipe ' + addr
+        : 'port ' + addr.port;
+      debug('Listening on ' + bind);
+    });
+  });
+});
+
 gulp.task('webpack', function() {
   return gulp.src('./src/js/main.js')
     .pipe(webpack( require('./config/webpack.config.js') ))
     .pipe(gulp.dest('./public/js/'));
 });
 
-gulp.task('default', ['less','webpack'], function () {
+gulp.task('dev', ['less','webpack', 'server'], function () {
   gulp.watch('./src/less/**/*.less', ['less']); 
   gulp.watch('./src/js/**/*.js', ['webpack']); 
   gulp.watch('./src/jsx/**/*.jsx', ['webpack']); 
