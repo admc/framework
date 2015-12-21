@@ -11,10 +11,10 @@ var http = require('http');
 
 function getTask(task) {
   return require('./gulp-tasks/' + task)(gulp, plugins);
-}
+};
 
 gulp.task('less', getTask('less'));
-//gulp.task('compress', getTask('compress'));
+gulp.task('compress', getTask('compress'));
 
 gulp.task('server', function() {
   var port = process.env.PORT || '3000';
@@ -37,13 +37,13 @@ gulp.task('server', function() {
 });
 
 gulp.task('webpack', function() {
-  return gulp.src('./src/js/main.js')
+  return gulp.src('./src/js/app/index.js')
     .pipe(webpack( require('./config/webpack.config.js') ))
     .pipe(gulp.dest('./public/js/'));
 });
 
-gulp.task('dev', ['less','webpack', 'server'], function () {
-  gulp.watch('./src/less/**/*.less', ['less']); 
-  gulp.watch('./src/js/**/*.js', ['webpack']); 
-  gulp.watch('./src/jsx/**/*.jsx', ['webpack']); 
+gulp.task('dev', ['less','compress', 'webpack', 'server'], function () {
+  gulp.watch('./src/client/less/**/*.less', ['less']); 
+  gulp.watch('./src/app/**/*.js', ['webpack']); 
+  gulp.watch('./src/app/**/*.jsx', ['webpack']); 
 })
