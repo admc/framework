@@ -14,38 +14,27 @@ const standardActions = [{
   text: 'Okay'
 }];
 
-const MyAlert = React.createClass({
+class MyAlert extends React.Component {
 
-  childContextTypes: {
-    muiTheme: React.PropTypes.object
-  },
-  getInitialState() {
-    return {
-      muiTheme: ThemeManager.getMuiTheme(LightRawTheme),
-    };
-  },
-  getChildContext() {
-    return {
-      muiTheme: this.state.muiTheme,
-    };
-  },
-  componentWillMount() {
-    let newMuiTheme = ThemeManager.modifyRawThemePalette(this.state.muiTheme, {
-      accent1Color: Colors.deepOrange500,
-    });
+   constructor(props) {
+     super(props);
+     this._handleRequestClose = this._handleRequestClose.bind(this);
+     this._handleTouchTap = this._handleTouchTap.bind(this);
+     this.state = { open: false }
+   }
 
-    this.setState({muiTheme: newMuiTheme});
-  },
   _handleRequestClose() {
     this.setState({
       open: false,
     });
-  },
+  }
+
   _handleTouchTap() {
     this.setState({
       open: true,
     });
-  },
+  }
+
   render() {
     return (
       <div>
@@ -59,8 +48,8 @@ const MyAlert = React.createClass({
         <RaisedButton label="Super Secret Password" primary={true} onTouchTap={this._handleTouchTap} />
       </div>
     );
-  },
-});
+  }
+};
 
 ReactDOM.render(<MyAlert/>,
   document.getElementById('alert-button')
