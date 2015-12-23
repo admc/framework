@@ -4,7 +4,7 @@ import RaisedButton from 'material-ui/lib/raised-button';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
-class MyAwesomeReactComponent extends React.Component {
+class MyButton extends React.Component {
   _handleClick () {
     console.log('test');
   }
@@ -18,4 +18,4 @@ class MyAwesomeReactComponent extends React.Component {
   }
 };
 
-ReactDOM.render(<MyAwesomeReactComponent/>, document.getElementById('button'));
+module.exports = MyButton;

@@ -6,5 +6,5 @@ class World extends React.Component {
       return <h1>World</h1>
     }
 }
- 
-ReactDOM.render(<World/>, document.getElementById('world'));
+
+module.exports = World;

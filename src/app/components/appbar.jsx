@@ -38,4 +38,4 @@ class MyAppBar extends React.Component {
   }
 };
 
-ReactDOM.render(<MyAppBar/>, document.getElementById('appbar'));
+module.exports = AppBar;

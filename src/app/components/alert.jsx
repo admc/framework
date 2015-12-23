@@ -51,6 +51,4 @@ class MyAlert extends React.Component {
   }
 };
 
-ReactDOM.render(<MyAlert/>,
-  document.getElementById('alert-button')
-);
+module.exports = MyAlert;

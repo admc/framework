@@ -45,7 +45,5 @@ class Navbar extends React.Component {
     );
   }
 }
- 
-ReactDOM.render(<Navbar/>,
-  document.getElementById('navbar')
-);
+
+module.exports = Navbar;
