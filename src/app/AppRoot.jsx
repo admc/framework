@@ -8,6 +8,7 @@ import MyButton from './components/button.jsx';
 import MyAppBar from './components/appbar.jsx';
 import MyAlert from './components/alert.jsx';
 import Navbar from './components/navbar.jsx';
+import MyList from './components/list.jsx';
  
 class AppRoot extends React.Component {
   render() {
@@ -18,6 +19,7 @@ class AppRoot extends React.Component {
         <Hello/><World/>
         <MyButton/>
         <MyAlert/>
+        <MyList/>
       </div>
     )
   }
