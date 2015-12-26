@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import RaisedButton from 'material-ui/lib/raised-button';
 import AppDispatcher from '../dispatcher/AppDispatcher';
 
@@ -13,10 +14,10 @@ class NewItemForm extends React.Component {
     let id = guid();
     
     // this gets the value from the input
-    let item_title = React.findDOMNode(this.refs.item_title).value.trim();
+    let item_title = ReactDOM.findDOMNode(this.refs.item_title).value.trim();
     
     // this removes the value from the input
-    React.findDOMNode(this.refs.item_title).value = '';
+    ReactDOM.findDOMNode(this.refs.item_title).value = '';
     
     // This is where the magic happens, 
     // no need to shoot this action all the way to the root of your application to edit state.
