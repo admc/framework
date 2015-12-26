@@ -9,7 +9,7 @@ import MyAppBar from './components/appbar.jsx';
 import MyAlert from './components/alert.jsx';
 import Navbar from './components/navbar.jsx';
  
-class App extends React.Component {
+class AppRoot extends React.Component {
   render() {
     return (
       <div>
@@ -23,6 +23,6 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App/>, 
-  document.getElementById('app')
+ReactDOM.render(<AppRoot/>, 
+  document.getElementById('app-root')
 );
