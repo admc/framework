@@ -1,49 +1,27 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import MenuItem from 'material-ui/lib/menus/menu-item';
-import RaisedButton from 'material-ui/lib/raised-button'
 import LeftNav from 'material-ui/lib/left-nav';
+import AppBar from 'material-ui/lib/app-bar';
+import RaisedButton from 'material-ui/lib/raised-button';
 
-var menuItems = [
-  { route: 'get-started', text: 'Get Started' },
-  { route: 'customization', text: 'Customization' },
-  { route: 'components', text: 'Components' },
-  { type: 'subheader', text: 'Resources' },
-  {
-     type: 'link',
-     payload: 'https://github.com/callemall/material-ui',
-     text: 'GitHub'
-  },
-  {
-     text: 'Disabled',
-     disabled: true
-  },
-  {
-     type: 'link',
-     payload: 'https://www.google.com',
-     text: 'Disabled Link',
-     disabled: true
-  },
-];
+export default class Navbar extends React.Component {
 
-class Navbar extends React.Component {
-   constructor(props) {
-     super(props);
-     this._toggleNav = this._toggleNav.bind(this);
-   }
-
-  _toggleNav() {
-    this.refs.leftNav.toggle();
+  constructor(props) {
+    super(props);
+    this.state = {open: false};
   }
 
+  handleToggle = () => this.setState({open: !this.state.open});
+
   render() {
-    return  (
+    return (
       <div>
-        <LeftNav ref="leftNav" menuItems={menuItems} docked={false} />
-        <RaisedButton label="Toggle Nav" primary={true} onTouchTap={this._toggleNav} />
+        <RaisedButton
+          label="Controlled LeftNav That Opens From Right"
+          onTouchTap={this.handleToggle} />
+        <LeftNav width={200} openRight={true} open={this.state.open} >
+          <AppBar title="AppBar"/>
+        </LeftNav>
       </div>
     );
   }
 }
-
-module.exports = Navbar;
