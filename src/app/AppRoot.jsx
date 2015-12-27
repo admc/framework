@@ -1,19 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { browserHistory, Router, Route, Link } from 'react-router'
+import Navbar from './components/navbar.jsx';
+import Directory from './components/directory.jsx'
 
 //theme
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
 import ThemeDecorator from 'material-ui/lib/styles/theme-decorator';
 import MaterialTheme from './config/theme';
-
-//components
-import Hello from './components/hello.jsx';
-import World from './components/world.jsx';
-import MyButton from './components/button.jsx';
-import MyAppBar from './components/appbar.jsx';
-import MyAlert from './components/alert.jsx';
-import Navbar from './components/navbar.jsx';
-import MyList from './components/list.jsx';
 
 class AppRoot extends React.Component {
 
@@ -26,12 +20,9 @@ class AppRoot extends React.Component {
   render() {
     return (
       <div>
-        <MyAppBar/>
+        Welcome to the awesome example app!
         <Navbar/>
-        <Hello/><World/>
-        <MyButton/>
-        <MyAlert/>
-        <MyList/>
+        {this.props.children}
       </div>
     )
   }
@@ -39,8 +30,17 @@ class AppRoot extends React.Component {
 
 AppRoot.childContextTypes = {
   muiTheme: React.PropTypes.object
-};
+}
 
-ReactDOM.render(<AppRoot/>, 
+/*ReactDOM.render(<AppRoot/>, 
   document.getElementById('app-root')
-);
+);*/
+
+ReactDOM.render((
+  <Router history={browserHistory}>
+    <Route path="/" component={AppRoot}>
+      <Route path="/directory" component={Directory} />
+      <Route path="*" component={AppRoot}/>
+    </Route>
+  </Router>
+), document.getElementById('app-root'))
