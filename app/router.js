@@ -4,8 +4,8 @@ var router = express.Router();
 var auth = require('connect-ensure-login').ensureLoggedIn('/user/login');
 
 //controllers
-var User = require('./controllers/user')
-var Home = require('./controllers/home')
+var user = require('./controllers/user');
+var home = require('./controllers/home');
 
 //auth behavior
 var redirectObj = { 
@@ -13,10 +13,10 @@ var redirectObj = {
   , failureRedirect: '/user/login'
 };
 
-router.get('/', auth, Home.index);
-router.get('/user/login', User.login);
-router.post('/user/login', passport.authenticate('local', redirectObj), User.loginAuth);
-router.get('/user/logout', User.logout);
-router.get('/user/profile', auth, User.profile);
+router.get('/', auth, home.index);
+router.get('/user/login', user.login);
+router.post('/user/login', passport.authenticate('local', redirectObj), user.loginAuth);
+router.get('/user/logout', user.logout);
+router.get('/user/profile', auth, user.profile);
 
 module.exports = router;

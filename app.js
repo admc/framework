@@ -14,7 +14,7 @@ var express = require('express')
 var routes = require('./app/router');
 
 passport.use(new LocalStrategy(function (username, password, done) {
-    models.User.findOne({ where: {username: username} }).then(function (user) {
+    models.user.findOne({ where: {username: username} }).then(function (user) {
       if (!user) { return done(null, false); }
       if (!hash.compareHash(password, user.password)) {
          return done(null, false);
@@ -30,7 +30,7 @@ passport.serializeUser(function(user, cb) {
 });
 
 passport.deserializeUser(function(id, cb) {
-  models.User.findById(id).then(function (user) {
+  models.user.findById(id).then(function (user) {
     cb(null, user);
   }, function(err) {
     if (err) { return cb(err); }

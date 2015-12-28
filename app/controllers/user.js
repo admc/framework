@@ -1,23 +1,21 @@
 var models  = require('../models');
-//models.whatever.findAll
+var user = {};
 
-var User = {};
-
-User.login = function(req, res) {
+user.login = function(req, res) {
   res.render('login');
 };
 
-User.logout =  function(req, res) {
+user.logout =  function(req, res) {
   req.logout();
   res.redirect('/');
 };
 
-User.profile = function(req, res) {
+user.profile = function(req, res) {
   res.render('profile', { user: req.user });
 };
 
-User.loginAuth = function(req, res) {
+user.loginAuth = function(req, res) {
   res.redirect('/');
 };
 
-module.exports = User;
+module.exports = user;

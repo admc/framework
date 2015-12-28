@@ -1,7 +1,7 @@
-var Home = {};
+var home = {};
 
-Home.index = function(req, res) {
+home.index = function(req, res) {
   res.render('home', { user: req.user, title: 'Sup yo', layout:false });
 };
 
-module.exports = Home;
+module.exports = home;
