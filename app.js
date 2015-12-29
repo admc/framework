@@ -4,39 +4,11 @@ var express = require('express')
   , logger = require('morgan')
   , cookieParser = require('cookie-parser')
   , bodyParser = require('body-parser')
-  , passport = require('passport')
-  , LocalStrategy = require('passport-local').Strategy
-  , models  = require('./app/models')
-  , hash = require('./app/helpers/hash')
+  , passport = require('./app/helpers/passportHelper')
   ;
 
 //Routes
 var routes = require('./app/router');
-
-passport.use(new LocalStrategy(function (username, password, done) {
-    models.user.findOne({ where: {username: username} }).then(function (user) {
-      if (!user) { return done(null, false); }
-      if (!hash.compareHash(password, user.password)) {
-         return done(null, false);
-      }
-      return done(null, user);
-    }, function(err) {
-      return done(err);
-    });
-  }));
-
-passport.serializeUser(function(user, cb) {
-  cb(null, user.id);
-});
-
-passport.deserializeUser(function(id, cb) {
-  models.user.findById(id).then(function (user) {
-    cb(null, user);
-  }, function(err) {
-    if (err) { return cb(err); }
-  });
-});
-
 var app = express();
 
 // view engine setup
