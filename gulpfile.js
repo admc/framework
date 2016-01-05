@@ -16,6 +16,11 @@ function getTask(task) {
 
 gulp.task('less', getTask('less'));
 gulp.task('compress', getTask('compress'));
+gulp.task('font', function() {
+  return gulp.src(['./src/client/font/**/*'])
+    .pipe(gulp.dest('./public/font'));
+});
+
 
 gulp.task('server', function() {
   var port = process.env.PORT || '3000';
@@ -37,21 +42,13 @@ gulp.task('server', function() {
   });
 });
 
-gulp.task('migrate', function() {
-   exec('sequelize db:migrate')
-});
-
-gulp.task('seed', function() {
-   exec('sequelize db:seed')
-});
-
 gulp.task('webpack', function() {
-  return gulp.src('./src/js/app/index.js')
+  return gulp.src('./src/js/app/AppRoot.jsx')
     .pipe(webpack( require('./config/webpack.config.js') ))
     .pipe(gulp.dest('./public/js/'));
 });
 
-gulp.task('dev', ['less','compress', 'webpack', 'server'], function () {
+gulp.task('dev', ['font', 'less','compress', 'webpack', 'server'], function () {
   gulp.watch('./src/client/less/**/*.less', ['less']); 
   gulp.watch('./src/app/**/*.js', ['webpack']); 
   gulp.watch('./src/app/**/*.jsx', ['webpack']); 

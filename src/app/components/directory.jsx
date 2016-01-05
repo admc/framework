@@ -1,25 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-//components
-import Hello from './Hello.jsx';
-import World from './World.jsx';
-import MyButton from './Button.jsx';
-import MyAlert from './Alert.jsx';
-import Navbar from './Navbar.jsx';
-import MyList from './List.jsx';
-import MyAppBar from './Appbar.jsx';
-import Things from './Things.jsx';
+import Hello from './Hello.jsx'
+import World from './World.jsx'
+import Button from './Button.jsx'
+import Alert from './Alert.jsx'
+import Navbar from './Navbar.jsx'
+import List from './List.jsx'
+import AppBar from './Appbar.jsx'
+import Things from './Things.jsx'
 
 export default class Directory extends React.Component {
   render() {
     return (
       <div>
-        <MyAppBar/><br/>
+        <AppBar/><br/>
         <Hello/><World/>
-        <MyButton/>
-        <MyAlert/>
-        <MyList/>
+        <Button/>
+        <Alert/>
+        <List/>
         <Things/>
       </div>
     )

@@ -1,55 +1,40 @@
 import {EventEmitter} from 'events';
 import _ from 'lodash';
 
+var _items = [];
+var loadItems = function(things) {
+  _items = things;
+};
+
 let ListStore = _.extend({}, EventEmitter.prototype, {
 
-  // Mock default data
-  items: [
-    {
-      name: 'Item 1',
-      id: 0
-    },
-    {
-      name: 'Item 2',
-      id: 1
-    }
-  ],
+  getItems: function() {
+    return _items;
+  }
 
-  // Get all items
-  getItems: function(){
-    return this.items;
-  },
+  , addItem: function(new_item) {
+    _items.push(new_item);
+  }
 
-  // Add item
-  addItem: function(new_item){
-    this.items.push(new_item);
-  },
-
-  // Remove item
-  removeItem: function(item_id){
+  , removeItem: function(item_id) {
     
-    let items = this.items;
-    
-    _.remove(items,(item) => {
+    let items = _items;
+    _.remove(items, (item) => {
       return item_id == item.id;
     });
     
-    this.items = items;
+    _items = items;
+  }
 
-  },
-
-  // Emit Change event
-  emitChange: function(){
+  , emitChange: function(){
     this.emit('change');
-  },
+  }
 
-  // Add change listener
-  addChangeListener: function(callback){
+  , addChangeListener: function(callback){
     this.on('change', callback);
-  },
+  }
 
-  // Remove change listener
-  removeChangeListener: function(callback){
+  , removeChangeListener: function(callback){
     this.removeListener('change', callback);
   }
 

@@ -1,30 +1,32 @@
-var React = require('react');
-var ThingStore = require('../stores/ThingStore');
-var ThingActions = require('../actions/ThingActions');
+var React = require('react')
+var ThingStore = require('../stores/ThingStore')
+var ThingActions = require('../actions/ThingActions')
 
-var Things = React.createClass({
-  getInitialState() {
-    return ThingStore.getState();
-  },
+export default class Things extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = ThingStore.getState()
+  }
 
   componentDidMount() {
-    ThingStore.listen(this.onChange);
-    ThingActions.fetchThings();
-  },
+    ThingStore.listen(this._onChange)
+    ThingActions.fetchThings()
+  }
 
   componentWillUnmount() {
-    ThingStore.unlisten(this.onChange);
-  },
+    ThingStore.unlisten(this._onChange)
+  }
 
-  onChange(state) {
-    this.setState(state);
-  },
+  _onChange = (state) => {
+    this.setState(state)
+  }
 
   render() {
    if (this.state.errorMessage) {
       return (
         <div>Something is wrong</div>
-      );
+      )
     }
 
     if (!this.state.things.length) {
@@ -37,14 +39,14 @@ var Things = React.createClass({
 
     return (
       <ul>
-        {this.state.things.map((thing) => {
-          return (
-            <li>{thing.name}</li>
-          );
-        })}
+        { 
+          this.state.things.map((thing) => {
+            return (
+              <li>{thing.name}</li>
+            )
+          }) 
+        }
       </ul>
-    );
+    )
   }
-});
-
-module.exports = Things;
+}

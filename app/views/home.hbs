@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <title>React Demo</title>
-        <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500' rel='stylesheet' type='text/css'>
+      <meta charset="UTF-8">
+      <title>Web Application</title>
+      <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500' rel='stylesheet' type='text/css'>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link href='/css/materialize.css' rel='stylesheet' type='text/css'>
     </head>
     <body>
-        <h1>{{title}}</h1>
-        <p>Welcome to {{title}} {{user.username}}</p>
         <div id="app-root"></div>
     </body>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js'></script>
+    <script>
+      window.username = "{{user.username}}";
+      $(document).ready(function() {
+        $(".button-collapse").sideNav();
+      })
+    </script>
     <script src="/js/bundle.js"></script>
+    <script src="/js/client.js"></script>
 </html>
 

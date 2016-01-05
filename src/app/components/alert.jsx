@@ -1,22 +1,24 @@
-import React from 'react';
-import Dialog from 'material-ui/lib/dialog';
-import FlatButton from 'material-ui/lib/flat-button';
-import RaisedButton from 'material-ui/lib/raised-button';
+import React from 'react'
+import Dialog from 'material-ui/lib/dialog'
+import FlatButton from 'material-ui/lib/flat-button'
+import RaisedButton from 'material-ui/lib/raised-button'
 
-export default class MyAlert extends React.Component {
+export default class Alert extends React.Component {
+
   constructor(props) {
-    super(props);
+    super(props)
+
     this.state = {
-      open: false,
-    };
+      open: false
+    }
   }
 
-  handleOpen = () => {
-    this.setState({open: true});
+  _handleOpen = () => {
+    this.setState({open: true})
   }
 
-  handleClose = () => {
-    this.setState({open: false});
+  _handleClose = () => {
+    this.setState({open: false})
   }
 
   render() {
@@ -24,23 +26,23 @@ export default class MyAlert extends React.Component {
       <FlatButton
         label="Cancel"
         secondary={true}
-        onTouchTap={this.handleClose} />,
-      <FlatButton
+        onTouchTap={this.handleClose} />
+      ,<FlatButton
         label="Submit"
         primary={true}
         keyboardFocused={true}
-        onTouchTap={this.handleClose} />,
+        onTouchTap={this.handleClose} />
     ];
 
     return (
       <div>
-        <RaisedButton label="Dialog With Actions" onTouchTap={this.handleOpen} />
+        <RaisedButton label="Dialog With Actions" onTouchTap={this._handleOpen} />
         <Dialog
           title="Dialog With Actions"
           actions={actions}
           modal={false}
           open={this.state.open}
-          onRequestClose={this.handleClose}>
+          onRequestClose={this._handleClose}>
           The actions in this window were passed in as an array of react objects.
         </Dialog>
       </div>

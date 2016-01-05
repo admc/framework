@@ -1,47 +1,47 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import ListStore from '../stores/ListStore';
-import AppDispatcher from '../dispatcher/AppDispatcher';
-import NewItemForm from './NewItemForm.jsx';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import ListStore from '../stores/ListStore'
+import AppDispatcher from '../dispatcher/AppDispatcher'
+import NewItemForm from './NewItemForm.jsx'
 
 let getListState = () => {
   return {
     items: ListStore.getItems()
-  };
+  }
 }
  
-class MyList extends React.Component {
-  _onChange() {
-    this.setState(getListState());
+export default class List extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = getListState()
   }
 
-  constructor() {
-    super();
-    this.state = getListState();
-  }
-
- // Add change listeners to stores
   componentDidMount() {
-    ListStore.addChangeListener(this._onChange.bind(this));
+    ListStore.addChangeListener(this._onChange)
   }
 
   // Remove change listeners from stores
   componentWillUnmount() {
-    ListStore.removeChangeListener(this._onChange.bind(this));
+    ListStore.removeChangeListener(this._onChange)
+  }
+
+  _onChange = () => {
+    this.setState(getListState())
   }
 
   removeItem(e){
     let id = e.target.dataset.id;
     
     AppDispatcher.dispatch({
-      action: 'remove-item',
-      id: id
-    });
+      action: 'remove-item'
+      , id: id
+    })
   }
 
   render() {
-    let _this = this;
-    let items = ListStore.getItems();
+    let _this = this
+    let items = ListStore.getItems()
     let itemHtml = items.map(( listItem ) => {
       return (
         <li key={ listItem.id }>
@@ -60,5 +60,3 @@ class MyList extends React.Component {
     )
   }
 }
-
-module.exports = MyList;
