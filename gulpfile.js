@@ -8,6 +8,7 @@ var app = require('./app');
 var models = require("./app/models");
 var debug = require('debug')('app:server');
 var http = require('http');
+var exec = require('gulp-exec');
 
 function getTask(task) {
   return require('./gulp-tasks/' + task)(gulp, plugins);
@@ -34,6 +35,14 @@ gulp.task('server', function() {
       debug('Listening on ' + bind);
     });
   });
+});
+
+gulp.task('migrate', function() {
+   exec('sequelize db:migrate')
+});
+
+gulp.task('seed', function() {
+   exec('sequelize db:seed')
 });
 
 gulp.task('webpack', function() {

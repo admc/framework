@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { browserHistory, Router, Route, Link } from 'react-router'
-import Navbar from './components/navbar.jsx';
-import Directory from './components/directory.jsx'
+import Navbar from './components/Navbar.jsx';
+import Directory from './components/Directory.jsx'
 
 //theme
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
