@@ -3,6 +3,6 @@
     'hostname': 'localhost',
     'username': 'adam',
     'password': '',
-    'database': 'cove_dev'
+    'database': 'demo_dev'
   }
 }

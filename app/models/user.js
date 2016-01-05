@@ -20,6 +20,7 @@ module.exports = function(sequelize, DataTypes) {
     }
     , firstname: DataTypes.STRING
     , lastname: DataTypes.STRING
+    , seen: DataTypes.DATE
   }, {
     classMethods: {
       associate: function(models) {

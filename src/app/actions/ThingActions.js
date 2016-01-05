@@ -2,8 +2,9 @@ var alt = require('../alt');
 import ThingSource from '../sources/ThingSource';
 
 class ThingActions {
+
   updateThings(things) {
-    return things;
+    return things
   }
 
   fetchThings() {

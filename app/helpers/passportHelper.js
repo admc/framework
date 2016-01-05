@@ -10,7 +10,13 @@ passport.use(new LocalStrategy(function (username, password, done) {
       if (!hash.compareHash(password, user.password)) {
          return done(null, false);
       }
-      return done(null, user);
+
+      //keep track of when users last logged in
+      user.seen = new Date();
+      user.save().then(function() {
+        return done(null, user);
+      })
+
     }, function(err) {
       return done(err);
     });

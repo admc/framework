@@ -21,6 +21,9 @@ export default class Header extends React.Component {
               <i className="material-icons">menu</i>
             </a>
             <ul className="right hide-on-med-and-down">
+              <li><a href="/user/logout">Logout</a></li>
+            </ul>
+            <ul className="right hide-on-med-and-down">
               <li><a href="#" ref="username"></a></li>
             </ul>
             <ul className="side-nav" id="mobile-demo">

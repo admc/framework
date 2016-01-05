@@ -5,18 +5,15 @@ module.exports = {
       return queryInterface.bulkInsert('things', [
         {
           name: 'Aangoon'
-          , createdAt: new Date()
-          , updatedAt: new Date()
+          , username: 'admin'
         }
         , {
           name: 'Kipnuk'
-          , createdAt: new Date()
-          , updatedAt: new Date()
+          , username: 'admin'
         }
         , {
           name: 'Kenaii'
-          , createdAt: new Date()
-          , updatedAt: new Date()
+          , username: 'admin'
         }], {});
   },
 
